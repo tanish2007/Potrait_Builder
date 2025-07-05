@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { useState } from 'react';
+import WelcomePage from './components/WelcomePage';
+import UploadConfirm from './components/UploadConfirm';
+import OrganizationSelect from './components/PotraitOrganizer';
+import PreviewEditor from './components/PreviewEditor';
+import PortraitImporter from './components/PortraitImporter';
+import { BrowserRouter ,Routes,Route} from "react-router-dom";
+import PortraitOrganizer from './components/PotraitOrganizer';
+import PSPAUpload from './components/pspa-upload';
 
 function App() {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <>
+   <BrowserRouter>
+      <Routes>
+        {/* Define the routes */}
+        <Route path="/" element={<PortraitImporter/>} />
+<Route path="/1" element={<PortraitOrganizer/>}/>
+<Route path="/2" element={<PSPAUpload/>}/>
+      </Routes>
+    </BrowserRouter>
+  
+   
+   </>
   );
 }
 
 export default App;
+
+
+
+
+
+
+

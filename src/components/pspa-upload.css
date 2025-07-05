@@ -1,0 +1,269 @@
+.upload-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.upload-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.upload-icon {
+  margin-bottom: 20px;
+}
+
+.folder-icon {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 60px;
+}
+
+.folder-base {
+  width: 80px;
+  height: 50px;
+  background-color: #f1c40f;
+  border-radius: 4px;
+  position: absolute;
+  bottom: 0;
+}
+
+.folder-tab {
+  width: 30px;
+  height: 15px;
+  background-color: #f39c12;
+  border-radius: 4px 4px 0 0;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.upload-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.step-indicator {
+  color: #6c757d;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.upload-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 20px 0;
+}
+
+.upload-description {
+  color: #6c757d;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.upload-content {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-zone {
+  border: 2px dashed #dee2e6;
+  border-radius: 12px;
+  padding: 60px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 30px;
+}
+
+.upload-zone:hover,
+.upload-zone.drag-active {
+  border-color: #6c7b7f;
+  background-color: #f8f9fa;
+}
+
+.upload-zone-content {
+  pointer-events: none;
+}
+
+.upload-zone-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.upload-zone-text {
+  font-size: 18px;
+  color: #495057;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.upload-zone-formats {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.uploaded-files {
+  margin-bottom: 30px;
+}
+
+.uploaded-files h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.file-list {
+  space-y: 10px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.file-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.file-icon {
+  font-size: 24px;
+  margin-right: 15px;
+}
+
+.file-details {
+  flex: 1;
+}
+
+.file-name {
+  font-weight: 500;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+.file-size {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.remove-file {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #dc3545;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.remove-file:hover {
+  background-color: #f8d7da;
+}
+
+.upload-requirements {
+  background-color: #e7f3ff;
+  border: 1px solid #b8daff;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.requirements-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  color: #004085;
+}
+
+.info-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.requirements-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #004085;
+}
+
+.requirements-list li {
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.upload-actions {
+  text-align: center;
+}
+
+.upload-button {
+  background-color: #6c7b7f;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  min-width: 200px;
+}
+
+.upload-button:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.upload-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .upload-container {
+    padding: 20px 15px;
+  }
+
+  .upload-content {
+    padding: 20px;
+  }
+
+  .upload-zone {
+    padding: 40px 15px;
+  }
+
+  .upload-title {
+    font-size: 24px;
+  }
+
+  .file-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .remove-file {
+    align-self: flex-end;
+  }
+}
