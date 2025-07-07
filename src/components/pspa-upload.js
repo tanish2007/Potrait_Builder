@@ -2,6 +2,9 @@
 
     import { useState, useRef } from "react"
     import "./pspa-upload.css"
+import { useNavigate } from "react-router-dom"
+
+
 
     export default function PSPAUpload() {
     const [dragActive, setDragActive] = useState(false)
@@ -9,6 +12,7 @@
     const [uploading, setUploading] = useState(false)
     const [groupedByGrade, setGroupedByGrade] = useState({})
     const fileInputRef = useRef(null)
+    const navigate = useNavigate()
 
     const handleDrag = (e) => {
         e.preventDefault()
@@ -98,6 +102,8 @@ const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') 
         }
 
         setGroupedByGrade(gradeGroups)
+
+        console.log(gradeGroups)
     if (Object.keys(gradeGroups).length === 0) {
     console.warn("No students were grouped. Check index.txt and image file names.")
     } else {
@@ -120,14 +126,16 @@ const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') 
         setUploadedFiles((prev) => prev.filter((_, i) => i !== index))
     }
 
-    const handleUpload = () => {
-        if (uploadedFiles.length === 0) return
-        setUploading(true)
-        setTimeout(() => {
-        setUploading(false)
-        alert("Files processed successfully. See console for grade grouping.")
-        }, 1500)
+ const handleUpload = () => {
+  if (Object.keys(groupedByGrade).length === 0) return
+
+  navigate("/3", {
+    state: {
+      groupedByGrade
     }
+  })
+}
+
 
     const onButtonClick = () => {
         fileInputRef.current?.click()
@@ -228,17 +236,28 @@ const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') 
             </div>
 
             {Object.keys(groupedByGrade).length > 0 && (
-            <div className="grade-summary">
-                <h3>📂 Students Grouped by Grade</h3>
-                <ul>
-                {Object.entries(groupedByGrade).map(([grade, students]) => (
-                    <li key={grade}>
-                    <strong>{grade}</strong>: {students.length} student{students.length !== 1 ? "s" : ""}
-                    </li>
-                ))}
-                </ul>
+  <div className="grade-preview-section">
+    <h3>📂 Students Grouped by Grade</h3>
+    {Object.entries(groupedByGrade).map(([grade, students]) => (
+      <div key={grade} className="grade-block">
+        <h4>Grade {grade} ({students.length} student{students.length !== 1 ? "s" : ""})</h4>
+        <div className="student-grid">
+          {students.map((student, index) => (
+            <div key={index} className="student-card">
+              <img
+                src={URL.createObjectURL(student.file)}
+                alt={student.fullName}
+                className="student-photo"
+              />
+              <div className="student-name">{student.fullName}</div>
             </div>
-            )}
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+
         </div>
         </div>
     )
