@@ -2,11 +2,71 @@
 
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 import "./preview.css"
 
 export default function PSPAPreviewPage() {
   const location = useLocation()
   const [gradeGroups, setGradeGroups] = useState({})
+
+  const s3Config = {
+  region: "us-east-1",
+  credentials: {
+    accessKeyId: "ASIASK5MCVJLRJNQIR5X",           
+    secretAccessKey: "qWHaF54bLAiQ1N6HHR2mRksjfjfzCnnuFp/jB9Gr",        
+    sessionToken: "IQoJb3JpZ2luX2VjEHIaCXVzLWVhc3QtMSJHMEUCIEVdoLJrxyKy9mmGudRSRu7aga0A13AH2bmSGLE/3E8oAiEA332tBCbGB9rukiP52GB4dNU+9itm/P0Y7TU4Hu2ed6Mq6QIIexAAGgwxNjA4ODUyODc1MTEiDPTtPFZHvWPSKF1iHirGApR/Ihe9dNM7rHV6kenzXxre+PtTx8JH1uZ/FMfVMz4n+tACg3K20zab380CLisEw0jbT6ymBsHSDgCk34P6zImf71B535lCtuOJmNncaRwqXHKvBWQfOOfGkA4+Xszeul2HQXefjlIdvlU9oq1fFmSNOKdYof/setgNhyA0lupGa8FjucEdKaX34Z9i/F2gYn0Pcof74FiMnEDgk7gbe3yWTJlCLSDCRbv9PfNnCmljRjHkr2VsQkM46xFOIRJMFG9zbtZ5DZj5kPW0jrD7J15Mb+lFh832p8utaGXid+1fdeHcuBWKOC70Hm5ZhFkx+d7xbNekX2jgSEDmjeQv2B8RPBLArlgob84zn7qqzYdEJ7SNzvODEv5k6GybVxlybOd7FNxQV6pwdSyMulQLA/vdLUN5G9RO7z0WodLnzkBQkT2F3StjMKSSsMMGOqcB+yQipKBwnjJDvKYmGnGkRmb5FF5z5/LzS9le4PdnHWdEa642lVERklDVottAMqg84CAX7vPg6KTVFxlxKWOZ5kJuBNVep/iZl33fElOC5zGVDZwbIPpzKZi/i6lSBPqKti3TeGZ8utTG+eqxIkSayCD5HIh7YhMkG406CeO2ZzV66jnpmDuYhxzPJ5/W3S74cHEX/uEQx+UfMtLOmtWJkdqF0dh7LeM=",  
+  },
+  bucketName: "pspa-potraits",       
+};
+function fileToWebStream(file) {
+  return file.stream ? file.stream() : file;
+}
+
+const s3Client = new S3Client({
+  region: s3Config.region,
+  credentials: {
+    accessKeyId: s3Config.credentials.accessKeyId,
+    secretAccessKey: s3Config.credentials.secretAccessKey,
+    sessionToken: s3Config.credentials.sessionToken,
+  },
+})
+
+async function uploadToBackend(file, teacher, grade) {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("teacher", teacher);
+  formData.append("grade", grade);
+
+  const res = await fetch("http://localhost:4000/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to upload");
+  }
+
+  const result = await res.json();
+  return result;
+}
+
+
+async function handleUpload() {
+  for (const [gradeName, students] of Object.entries(gradeGroups)) {
+    for (const student of students) {
+      const teacherName = student.teacherName || "UnknownTeacher" // fallback
+      try {
+        await uploadToBackend(student.file, teacherName, gradeName)
+        console.log(`Uploaded ${student.file.name} to ${teacherName}/${gradeName}/`)
+      } catch (err) {
+        console.error("Upload failed:", err)
+      }
+    }
+  }
+
+  alert("All uploads completed!")
+}
+
 
   useEffect(() => {
     const data = location.state?.groupedByGrade
@@ -86,6 +146,8 @@ export default function PSPAPreviewPage() {
           />
         ))}
       </div>
+      <button className="upload-btn" onClick={handleUpload}>Upload to S3</button>
+
     </div>
   )
 }

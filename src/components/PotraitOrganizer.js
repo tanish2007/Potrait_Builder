@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './PortraitOrganizer.css';
 
 const PortraitOrganizer = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const navigate = useNavigate(); // 🔁 Navigation hook
 
   const handleSelect = (option) => {
     setSelectedOption(option);
     console.log(`Selected: ${option}`);
+
+    if (option === 'By Grade') {
+      navigate('/2'); // 🔁 Redirect to /2
+    }
   };
 
   return (
@@ -50,7 +56,7 @@ const PortraitOrganizer = () => {
           </p>
           <button 
             className="select-button"
-            onClick={() => handleSelect('By Teacher')}
+            disabled
           >
             Select
           </button>
@@ -68,7 +74,7 @@ const PortraitOrganizer = () => {
           </p>
           <button 
             className="select-button"
-            onClick={() => handleSelect('In One Group')}
+            disabled
           >
             Select
           </button>

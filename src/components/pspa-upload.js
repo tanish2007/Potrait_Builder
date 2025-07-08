@@ -36,91 +36,163 @@ import { useNavigate } from "react-router-dom"
         }
     }
 
-    const handleFiles = async (files) => {
-        const fileArray = Array.from(files)
-        setUploadedFiles(fileArray)
+//     const handleFiles = async (files) => {
+//         const fileArray = Array.from(files)
+//         setUploadedFiles(fileArray)
         
-        console.log(fileArray)
-        const indexFile = fileArray.find((file) => file.name.toLowerCase() === "index.txt")
-        const imageFiles = fileArray.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
+//         console.log(fileArray)
+//         const indexFile = fileArray.find((file) => file.name.toLowerCase() === "index.txt")
+//         const imageFiles = fileArray.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
 
-        if (!indexFile) {
-        alert("index.txt not found. PSPA format requires an index.txt file.")
-        return
-        }
+//         if (!indexFile) {
+//         alert("index.txt not found. PSPA format requires an index.txt file.")
+//         return
+//         }
 
-    const text = await indexFile.text();
-    console.log("📄 index.txt content:\n", text); 
+//     const text = await indexFile.text();
+//     console.log("📄 index.txt content:\n", text); 
 
-    const lines = text.replace(/\r\n/g, "\n").split("\n").map(line => line.trim())
-    const headers = lines[0].split("\t").map(h => h.trim())
-    console.log("Headers detected:", headers)
-    console.log("lines", lines)
+//     const lines = text.replace(/\r\n/g, "\n").split("\n").map(line => line.trim())
+//     const headers = lines[0].split("\t").map(h => h.trim())
+//     console.log("Headers detected:", headers)
+//     console.log("lines", lines)
 
-        const gradeIndex = headers.findIndex((h) => h.toLowerCase().includes("grade"))
-   const folderIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefolder")
-const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefilename")
-
-
-        const firstNameIndex = headers.findIndex((h) => h.toLowerCase().includes("first"))
-        const lastNameIndex = headers.findIndex((h) => h.toLowerCase().includes("last"))
-
-        if (gradeIndex === -1 || filenameIndex === -1 || folderIndex === -1) {
-        alert("index.txt is missing required columns: 'Grade', 'Image Folder', or 'Image File Name'")
-        return
-        }
-
-        const gradeGroups = {}
-
-        for (let i = 1; i < lines.length; i++) {
-        const fields = lines[i].split("\t")
-        const grade = fields[gradeIndex]?.trim() || "Unknown"
-        const imageFolder = fields[folderIndex]?.trim().replace(/\\/g, "/") || ""
-        const imageFileName = fields[filenameIndex]?.trim()
-        const firstName = fields[firstNameIndex]?.trim() || ""
-        const lastName = fields[lastNameIndex]?.trim() || ""
-        const expectedPath = `${imageFolder}/${imageFileName}`.toLowerCase()
+//         const gradeIndex = headers.findIndex((h) => h.toLowerCase().includes("grade"))
+//    const folderIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefolder")
+// const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefilename")
 
 
-        console.log(expectedPath,"ee")
+//         const firstNameIndex = headers.findIndex((h) => h.toLowerCase().includes("first"))
+//         const lastNameIndex = headers.findIndex((h) => h.toLowerCase().includes("last"))
 
-        const matchedImage = imageFiles.find((img) =>
-            img.webkitRelativePath.toLowerCase().endsWith(expectedPath)
-        )
+//         if (gradeIndex === -1 || filenameIndex === -1 || folderIndex === -1) {
+//         alert("index.txt is missing required columns: 'Grade', 'Image Folder', or 'Image File Name'")
+//         return
+//         }
 
-        if (matchedImage) {
-            const student = {
-            fullName: `${firstName} ${lastName}`.trim(),
-            file: matchedImage,
-            fileName: matchedImage.name,
-            relativePath: matchedImage.webkitRelativePath
-            }
+//         const gradeGroups = {}
 
-            if (!gradeGroups[grade]) gradeGroups[grade] = []
-            gradeGroups[grade].push(student)
-        }
-        }
+//         for (let i = 1; i < lines.length; i++) {
+//         const fields = lines[i].split("\t")
+//         const grade = fields[gradeIndex]?.trim() || "Unknown"
+//         const imageFolder = fields[folderIndex]?.trim().replace(/\\/g, "/") || ""
+//         const imageFileName = fields[filenameIndex]?.trim()
+//         const firstName = fields[firstNameIndex]?.trim() || ""
+//         const lastName = fields[lastNameIndex]?.trim() || ""
+//         const expectedPath = `${imageFolder}/${imageFileName}`.toLowerCase()
 
-        setGroupedByGrade(gradeGroups)
 
-        console.log(gradeGroups)
-    if (Object.keys(gradeGroups).length === 0) {
+//         console.log(expectedPath,"ee")
+
+//         const matchedImage = imageFiles.find((img) =>
+//             img.webkitRelativePath.toLowerCase().endsWith(expectedPath)
+//         )
+
+//         if (matchedImage) {
+//             const student = {
+//             fullName: `${firstName} ${lastName}`.trim(),
+//             file: matchedImage,
+//             fileName: matchedImage.name,
+//             relativePath: matchedImage.webkitRelativePath
+//             }
+
+//             if (!gradeGroups[grade]) gradeGroups[grade] = []
+//             gradeGroups[grade].push(student)
+//         }
+//         }
+
+//         setGroupedByGrade(gradeGroups)
+
+//         console.log(gradeGroups)
+//     if (Object.keys(gradeGroups).length === 0) {
+//     console.warn("No students were grouped. Check index.txt and image file names.")
+//     } else {
+//     console.log("✅ Students grouped successfully:")
+
+//     console.log(gradeGroups)
+//     Object.entries(gradeGroups).forEach(([grade, students]) => {
+//         console.group(`Grade ${grade}`)
+//         console.table(
+//         students.map((s) => ({
+//             Name: s.fullName,
+//             Image: s.fileName,
+//         }))
+//         )
+//         console.groupEnd()
+//     })
+//     }
+
+//     }
+
+const handleFiles = async (files) => {
+  const fileArray = Array.from(files)
+  setUploadedFiles(fileArray)
+
+  const indexFile = fileArray.find((file) => file.name.toLowerCase() === "index.txt")
+  const imageFiles = fileArray.filter((file) => /\.(jpg|jpeg|png)$/i.test(file.name))
+
+  if (!indexFile) {
+    alert("index.txt not found. PSPA format requires an index.txt file.")
+    return
+  }
+
+  const text = await indexFile.text()
+  const lines = text.replace(/\r\n/g, "\n").split("\n").map(line => line.trim())
+  const headers = lines[0].split("\t").map(h => h.trim())
+
+  const gradeIndex = headers.findIndex((h) => h.toLowerCase().includes("grade"))
+  const folderIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefolder")
+  const filenameIndex = headers.findIndex(h => h.toLowerCase().replace(/\s/g, '') === "imagefilename")
+  const firstNameIndex = headers.findIndex((h) => h.toLowerCase().includes("first"))
+  const lastNameIndex = headers.findIndex((h) => h.toLowerCase().includes("last"))
+  const teacherNameIndex = headers.findIndex((h) => h.toLowerCase().includes("teacher"))
+
+  if (gradeIndex === -1 || filenameIndex === -1 || folderIndex === -1) {
+    alert("index.txt is missing required columns: 'Grade', 'Image Folder', or 'Image File Name'")
+    return
+  }
+
+  const gradeGroups = {}
+
+  for (let i = 1; i < lines.length; i++) {
+    const fields = lines[i].split("\t")
+    const grade = fields[gradeIndex]?.trim() || "Unknown"
+    const imageFolder = fields[folderIndex]?.trim().replace(/\\/g, "/") || ""
+    const imageFileName = fields[filenameIndex]?.trim()
+    const firstName = fields[firstNameIndex]?.trim() || ""
+    const lastName = fields[lastNameIndex]?.trim() || ""
+    const teacherName = teacherNameIndex !== -1 ? fields[teacherNameIndex]?.trim() || "Unknown" : "Unknown"
+
+    const expectedPath = `${imageFolder}/${imageFileName}`.toLowerCase()
+
+    const matchedImage = imageFiles.find((img) =>
+      img.webkitRelativePath.toLowerCase().endsWith(expectedPath)
+    )
+
+    if (matchedImage) {
+      const student = {
+        fullName: `${firstName} ${lastName}`.trim(),
+        file: matchedImage,
+        fileName: matchedImage.name,
+        relativePath: matchedImage.webkitRelativePath,
+        teacherName: teacherName  // ✅ Now included
+      }
+
+      if (!gradeGroups[grade]) gradeGroups[grade] = []
+      gradeGroups[grade].push(student)
+    }
+  }
+
+  setGroupedByGrade(gradeGroups)
+
+  if (Object.keys(gradeGroups).length === 0) {
     console.warn("No students were grouped. Check index.txt and image file names.")
-    } else {
+  } else {
     console.log("✅ Students grouped successfully:")
-    Object.entries(gradeGroups).forEach(([grade, students]) => {
-        console.group(`Grade ${grade}`)
-        console.table(
-        students.map((s) => ({
-            Name: s.fullName,
-            Image: s.fileName,
-        }))
-        )
-        console.groupEnd()
-    })
-    }
+    console.log(gradeGroups)
+  }
+}
 
-    }
 
     const removeFile = (index) => {
         setUploadedFiles((prev) => prev.filter((_, i) => i !== index))
