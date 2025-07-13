@@ -82,7 +82,7 @@ const PortraitOrganizer = () => {
       </div>
 
       <div className="note-section">
-        <div className="info-icon">i</div>
+        <div className="info-icon1">i</div>
         <p className="note-text">
           <strong>Note:</strong> If you choose "In One Group" or your photographer disc does not 
           include data for the grouping you select, your portraits will be uploaded into 

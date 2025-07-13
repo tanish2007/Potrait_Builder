@@ -280,10 +280,10 @@
   border-left: 4px solid #6c757d;
 }
 
-.info-icon {
+.info-icon1{
   width: 20px;
   height: 20px;
-  background-color: #6c757d;
+  background-color: #17a2b8;
   color: white;
   border-radius: 50%;
   display: flex;
@@ -294,6 +294,7 @@
   flex-shrink: 0;
   margin-top: 2px;
 }
+
 
 .note-text {
   font-size: 14px;

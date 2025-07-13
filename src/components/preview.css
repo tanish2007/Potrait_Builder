@@ -102,6 +102,23 @@
   align-items: center;
   justify-content: center;
 }
+.loading-overlay2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease;
+}
 
 .status-icon.uploading .spinner {
   width: 16px;
@@ -162,7 +179,8 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 .upload-btn {
-  margin: 20px auto;
+  display: block;             /* Make it a block-level element */
+  margin: 40px auto 0;        /* Center it horizontally with spacing from above */
   padding: 12px 24px;
   font-size: 16px;
   background: #10b981;
@@ -170,7 +188,13 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  text-align: center;
+
 }
+.upload-btn:hover {
+  background: #059669; /* Darker green on hover */
+}
+
 
 
 /* Responsive Design */

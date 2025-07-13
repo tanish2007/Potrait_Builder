@@ -26,11 +26,7 @@ const PortraitImporter = () => {
               <div className="portrait-image"></div>
             </div>
           </div>
-          <div className="upload-arrow">
-            <div className="arrow-circle">
-              <span className="arrow-up">↑</span>
-            </div>
-          </div>
+         
         </div>
 
         <div className="step-indicator">Step 1 of 4:</div>
