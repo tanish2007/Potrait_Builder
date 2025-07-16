@@ -1,0 +1,243 @@
+.upload-page {
+  min-height: 100vh;
+  background-color: #f8fafc;
+  padding: 40px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.step-icon {
+  margin-bottom: 20px;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 12px rgba(251, 191, 36, 0.1);
+}
+
+.step-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 8px 0;
+}
+
+.upload-status {
+  font-size: 18px;
+  color: #059669;
+  font-weight: 500;
+  margin: 0;
+}
+
+.grades-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.grade-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.photo-section {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.photo-grid {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.photo-placeholder {
+  width: 60px;
+  height: 75px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  border: 2px solid #d1d5db;
+}
+
+.photo-count-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #10b981;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 50px;
+  min-width: 32px;
+  text-align: center;
+}
+
+.status-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.status-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-overlay2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  backdrop-filter: blur(5px);
+  transition: opacity 0.3s ease;
+}
+
+.status-icon.uploading .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f59e0b;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.status-text {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.grade-input-section {
+  margin-top: 16px;
+}
+
+.grade-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.grade-input {
+  width: auto;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1f2937;
+  background-color: #f9fafb;
+}
+
+.grade-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.preview-thumb {
+  width: 100px;       /* typical passport width */
+  height: 125px;      /* typical passport height (4:5 ratio) */
+  object-fit: cover;  /* crop to fit the dimensions without distortion */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.upload-btn {
+  display: block;             /* Make it a block-level element */
+  margin: 40px auto 0;        /* Center it horizontally with spacing from above */
+  padding: 12px 24px;
+  font-size: 16px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+
+}
+.upload-btn:hover {
+  background: #059669; /* Darker green on hover */
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .grades-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .upload-page {
+    padding: 20px 16px;
+  }
+
+  .step-title {
+    font-size: 24px;
+  }
+
+  .upload-status {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grades-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .icon-circle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .step-title {
+    font-size: 20px;
+  }
+}
+
+

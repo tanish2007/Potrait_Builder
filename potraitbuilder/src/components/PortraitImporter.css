@@ -1,0 +1,254 @@
+.portrait-importer {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+}
+
+.header {
+  padding: 20px 30px;
+  background-color: #f8f9fa;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.main-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.illustration-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.folder-icon {
+  position: relative;
+  width: 120px;
+  height: 90px;
+}
+
+.folder-base {
+  width: 100%;
+  height: 70px;
+  background-color: #ffd700;
+  border-radius: 8px;
+  position: absolute;
+  bottom: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.folder-tab {
+  width: 40px;
+  height: 20px;
+  background-color: #ffd700;
+  border-radius: 4px 4px 0 0;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.portrait-preview {
+  position: absolute;
+  top: 15px;
+  right: -20px;
+  width: 50px;
+  height: 60px;
+  background-color: #4a90e2;
+  border-radius: 6px;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.portrait-image {
+  width: 30px;
+  height: 30px;
+  background-color: #f4a261;
+  border-radius: 50%;
+  margin: 8px auto;
+  position: relative;
+}
+
+.portrait-image::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  background-color: #f4a261;
+  border-radius: 0 0 10px 10px;
+}
+
+.upload-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #28a745;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.arrow-up {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.step-indicator {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.main-heading {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 30px;
+  line-height: 1.3;
+}
+
+.description {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.steps-container {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+}
+
+.step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.step-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 80px;
+  color: #666;
+  font-weight: 500;
+}
+
+.chevron {
+  color: #999;
+  font-size: 12px;
+}
+
+.step-description {
+  color: #666;
+  line-height: 1.5;
+  font-size: 15px;
+}
+
+.note-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto 50px auto;
+  text-align: left;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #17a2b8;
+}
+
+.info-icon {
+  width: 24px;
+  height: 24px;
+  background-color: #17a2b8;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.info-symbol {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.note-text {
+  color: #666;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.select-folder-btn {
+  background-color: #5a6c57;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(90, 108, 87, 0.3);
+}
+
+.select-folder-btn:hover {
+  background-color: #4a5a47;
+}
+
+.select-folder-btn:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px 15px;
+  }
+
+  .illustration-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .main-heading {
+    font-size: 24px;
+  }
+
+  .steps-container {
+    max-width: 100%;
+  }
+
+  .note-section {
+    max-width: 100%;
+    padding: 15px;
+  }
+}
